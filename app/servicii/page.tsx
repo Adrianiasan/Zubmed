@@ -37,7 +37,7 @@ export default async function ServiciiPage() {
       {/* Grid servicii */}
       <section className="py-14 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 lg:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 lg:gap-6">
             {services.map((service) => (
               <ServiceCard key={service.id} service={service} />
             ))}

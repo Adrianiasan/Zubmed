@@ -17,7 +17,7 @@ interface Props {
 export default function BlogCard({ post }: Props) {
   return (
     <article className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md border border-slate-100 hover:border-blue-100 transition-all duration-300 group flex flex-col">
-      <div className="relative aspect-[16/10] overflow-hidden bg-slate-100 shrink-0">
+      <div className="relative aspect-square overflow-hidden bg-slate-100 shrink-0">
         {post.imageUrl ? (
           <Image
             src={post.imageUrl}

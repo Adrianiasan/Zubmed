@@ -51,14 +51,14 @@ export default function ContactPage() {
             </h1>
           </div>
           {/* Formular mare */}
-          <div className="bg-white border border-slate-100 rounded-3xl shadow-sm p-8 lg:p-12 mb-6">
+          <div className="bg-white border border-slate-100 rounded-3xl shadow-sm p-5 sm:p-8 lg:p-12 mb-6">
             <h2 className="text-2xl font-bold text-slate-900 mb-1">Trimite-ne un mesaj</h2>
             <p className="text-slate-500 text-sm mb-8">Completează formularul și te vom contacta în maxim 24 de ore.</p>
             <ContactForm />
           </div>
 
           {/* Detalii contact sub formular */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
             {contactDetails.map(({ icon, label, value, sub, href }) => (
               <div key={label} className="flex gap-3 p-4 bg-slate-50 rounded-xl border border-slate-100">
                 <div className="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center shrink-0">
