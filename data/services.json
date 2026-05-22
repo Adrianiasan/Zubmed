@@ -1,0 +1,121 @@
+[
+  {
+    "id": "1",
+    "title": "Stomatologie Terapeutică",
+    "slug": "stomatologie-terapeutica",
+    "shortDesc": "Tratamente complete pentru sănătatea și integritatea dinților tăi.",
+    "description": "Oferim tratamente stomatologice complete pentru prevenirea și vindecarea afecțiunilor dentare. De la tratamentul cariilor și restaurarea dentară, până la endodonție și curățare profesională, echipa noastră asigură îngrijire de calitate pentru fiecare pacient.",
+    "icon": "tooth",
+    "imageUrl": "/stomatologieterapeutica.png",
+    "price": "De la 150 MDL",
+    "duration": "30–60 min",
+    "benefits": [
+      "Tratament carii",
+      "Restaurare dentară",
+      "Tratament canal radicular (Endodonție)",
+      "Tratament pulpită și parodontită",
+      "Curățare profesională a dinților"
+    ],
+    "featured": true,
+    "order": 1,
+    "createdAt": "2024-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "2",
+    "title": "Chirurgie Dentară",
+    "slug": "chirurgie-dentara",
+    "shortDesc": "Intervenții chirurgicale precise, sigure și minim invazive.",
+    "description": "Departamentul de chirurgie dentară oferă extracții simple și complexe, inclusiv extracția molarilor de minte, precum și servicii de implantare dentară. Folosim tehnici moderne și anestezie locală eficientă pentru o experiență cât mai confortabilă.",
+    "icon": "surgery",
+    "imageUrl": "/chirurgiedentara.png",
+    "price": "De la 300 MDL",
+    "duration": "30–90 min",
+    "benefits": [
+      "Extracție dentară",
+      "Extracție molarilor de minte",
+      "Implantare"
+    ],
+    "featured": true,
+    "order": 2,
+    "createdAt": "2024-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "3",
+    "title": "Protetică Dentară",
+    "slug": "protetica-dentara",
+    "shortDesc": "Restaurarea dinților lipsă sau deteriorați cu soluții estetice durabile.",
+    "description": "Protetică dentară modernă pentru restaurarea funcției și esteticii dentare. Confecționăm coroane, punți, fațete și proteze de înaltă calitate, inclusiv lucrări pe implanturi, adaptate perfect nevoilor și anatomiei fiecărui pacient.",
+    "icon": "smile",
+    "imageUrl": "/proteticadentara.png",
+    "price": "De la 1 500 MDL",
+    "duration": "2–4 ședințe",
+    "benefits": [
+      "Coroane",
+      "Punți",
+      "Fațete",
+      "Proteze mobile și fixe",
+      "Stomatologie pe implanturi"
+    ],
+    "featured": true,
+    "order": 3,
+    "createdAt": "2024-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "4",
+    "title": "Parodontologie",
+    "slug": "parodontologie",
+    "shortDesc": "Tratamentul gingiilor – fundația unui zâmbet sănătos.",
+    "description": "Parodontologia se ocupă cu diagnosticarea și tratarea bolilor gingiilor și țesuturilor de susținere ale dinților. Tratăm gingivita și parodontita, efectuăm curățarea pungilor dentare și consolidarea gingiilor pentru o sănătate orală de durată.",
+    "icon": "gum",
+    "imageUrl": "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600&q=80",
+    "price": "De la 350 MDL",
+    "duration": "45–60 min",
+    "benefits": [
+      "Gingivită",
+      "Parodontită",
+      "Curățarea pungilor dentare",
+      "Consolidarea gingiilor"
+    ],
+    "featured": true,
+    "order": 4,
+    "createdAt": "2024-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "5",
+    "title": "Stomatologie Estetică",
+    "slug": "stomatologie-estetica",
+    "shortDesc": "Transformă-ți zâmbetul cu tehnici estetice moderne.",
+    "description": "Stomatologia estetică îmbină arta cu tehnologia pentru a crea zâmbetul perfect. Oferim albire dentară profesională, fațete ceramice, restaurare artistică și corecții ale formei și culorii dinților pentru rezultate naturale și spectaculoase.",
+    "icon": "whitening",
+    "imageUrl": "https://images.unsplash.com/photo-1628348070889-cb656235b4eb?w=600&q=80",
+    "price": "De la 800 MDL",
+    "duration": "1–3 ședințe",
+    "benefits": [
+      "Albire dentară",
+      "Fațete",
+      "Restaurare artistică",
+      "Corectarea formei și culorii dinților"
+    ],
+    "featured": true,
+    "order": 5,
+    "createdAt": "2024-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "6",
+    "title": "Diagnostic",
+    "slug": "diagnostic",
+    "shortDesc": "Diagnostic modern și precis pentru un plan de tratament optim.",
+    "description": "Serviciile noastre de diagnostic utilizează echipamente de ultimă generație pentru evaluarea completă a sănătății orale. Radiografia digitală și imagistica panoramică ne permit să identificăm cu precizie orice problemă dentară și să planificăm tratamentul optim.",
+    "icon": "diagnostic",
+    "imageUrl": "https://images.unsplash.com/photo-1516549655169-df83a0774514?w=600&q=80",
+    "price": "De la 100 MDL",
+    "duration": "15–30 min",
+    "benefits": [
+      "Radiografie digitală",
+      "Imagistică panoramică"
+    ],
+    "featured": true,
+    "order": 6,
+    "createdAt": "2024-01-01T00:00:00.000Z"
+  }
+]
