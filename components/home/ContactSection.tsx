@@ -41,11 +41,11 @@ export default function ContactSection() {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
-          <div className="grid grid-cols-1 gap-4 content-start">
+          <div className="flex flex-col gap-4">
             {contactItems.map(({ icon, label, value }) => (
               <div
                 key={label}
-                className="flex gap-4 p-5 bg-slate-50 rounded-2xl border border-slate-100"
+                className="flex gap-4 p-5 bg-slate-50 rounded-2xl border border-slate-100 w-full"
               >
                 <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center shrink-0">
                   <svg
@@ -69,7 +69,7 @@ export default function ContactSection() {
               </div>
             ))}
 
-            <div className="col-span-2 rounded-2xl overflow-hidden border border-slate-100">
+            <div className="rounded-2xl overflow-hidden border border-slate-100">
               <iframe
                 src="https://maps.google.com/maps?q=46.3019982,28.6594422&hl=ro&z=17&output=embed"
                 width="100%"
