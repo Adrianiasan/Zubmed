@@ -67,7 +67,7 @@
     "shortDesc": "Tratamentul gingiilor – fundația unui zâmbet sănătos.",
     "description": "Parodontologia se ocupă cu diagnosticarea și tratarea bolilor gingiilor și țesuturilor de susținere ale dinților. Tratăm gingivita și parodontita, efectuăm curățarea pungilor dentare și consolidarea gingiilor pentru o sănătate orală de durată.",
     "icon": "gum",
-    "imageUrl": "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600&q=80",
+    "imageUrl": "/foto.png",
     "price": "De la 350 MDL",
     "duration": "45–60 min",
     "benefits": [
@@ -87,7 +87,7 @@
     "shortDesc": "Transformă-ți zâmbetul cu tehnici estetice moderne.",
     "description": "Stomatologia estetică îmbină arta cu tehnologia pentru a crea zâmbetul perfect. Oferim albire dentară profesională, fațete ceramice, restaurare artistică și corecții ale formei și culorii dinților pentru rezultate naturale și spectaculoase.",
     "icon": "whitening",
-    "imageUrl": "https://images.unsplash.com/photo-1628348070889-cb656235b4eb?w=600&q=80",
+    "imageUrl": "/stomatologieestetica1.png",
     "price": "De la 800 MDL",
     "duration": "1–3 ședințe",
     "benefits": [
@@ -107,7 +107,7 @@
     "shortDesc": "Diagnostic modern și precis pentru un plan de tratament optim.",
     "description": "Serviciile noastre de diagnostic utilizează echipamente de ultimă generație pentru evaluarea completă a sănătății orale. Radiografia digitală și imagistica panoramică ne permit să identificăm cu precizie orice problemă dentară și să planificăm tratamentul optim.",
     "icon": "diagnostic",
-    "imageUrl": "https://images.unsplash.com/photo-1516549655169-df83a0774514?w=600&q=80",
+    "imageUrl": "/diagnostica.png",
     "price": "De la 100 MDL",
     "duration": "15–30 min",
     "benefits": [

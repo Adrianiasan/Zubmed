@@ -124,7 +124,7 @@ export default async function ServicePage(props: PageProps<'/servicii/[slug]'>) 
                 </svg>
               </Link>
               <a
-                href="tel:+40721000000"
+                href="tel:+37367722700"
                 className="inline-flex items-center justify-center gap-2 bg-white border border-slate-200 hover:border-blue-300 text-slate-700 hover:text-blue-600 font-semibold px-7 py-3 rounded-full transition-colors text-sm"
               >
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">

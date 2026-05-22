@@ -47,7 +47,9 @@ export default function Footer() {
               ].map(({ label, path }) => (
                 <a
                   key={label}
-                  href="#"
+                  href={label === 'Instagram' ? 'https://www.instagram.com/zubmed.clinica/' : '#'}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={label}
                   className="w-9 h-9 bg-slate-800 hover:bg-blue-600 rounded-lg flex items-center justify-center transition-colors"
                 >

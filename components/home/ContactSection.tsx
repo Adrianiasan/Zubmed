@@ -69,19 +69,16 @@ export default function ContactSection() {
               </div>
             ))}
 
-            <div className="sm:col-span-2 h-52 bg-slate-100 rounded-2xl overflow-hidden flex items-center justify-center">
-              <div className="text-center text-slate-400">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  className="w-10 h-10 mx-auto mb-2 text-slate-300"
-                >
-                  <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-                <p className="text-sm">Hartă locație</p>
-              </div>
+            <div className="col-span-2 rounded-2xl overflow-hidden border border-slate-100">
+              <iframe
+                src="https://maps.google.com/maps?q=46.3019982,28.6594422&hl=ro&z=17&output=embed"
+                width="100%"
+                height="224"
+                style={{ border: 0, display: 'block' }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
             </div>
           </div>
 
@@ -108,7 +105,7 @@ export default function ContactSection() {
                     Telefon
                   </label>
                   <div className="bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-400">
-                    +40 7xx xxx xxx
+                    +373 xx xxx xxx
                   </div>
                 </div>
               </div>

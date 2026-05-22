@@ -98,7 +98,7 @@ export default function ContactForm() {
             id="phone"
             name="phone"
             type="tel"
-            placeholder="+40 7xx xxx xxx"
+            placeholder="+373 xx xxx xxx"
             className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent transition-all"
           />
         </div>

@@ -29,7 +29,7 @@ const faqs = [
   },
   {
     q: 'Cum mă pot programa?',
-    a: 'Puteți suna la +40 721 000 000, trimite un email la contact@zubmed.ro sau completa formularul de pe pagina de contact. Răspundem în maximum 24 de ore lucrătoare.',
+    a: 'Puteți suna la +373 67 722 700, trimite un email la zubmed@gmail.com sau completa formularul de pe pagina de contact. Răspundem în maximum 24 de ore lucrătoare.',
   },
   {
     q: 'Este albirea dentară sigură?',
