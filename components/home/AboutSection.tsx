@@ -34,7 +34,7 @@ export default function AboutSection() {
         {/* Imagine — full bleed */}
         <div className="relative min-h-[340px] lg:min-h-0">
           <Image
-            src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=900&q=85"
+            src="/desprenoi.png"
             alt="Clinica Zubmed"
             fill
             className="object-cover"
