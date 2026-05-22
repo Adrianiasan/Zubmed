@@ -58,7 +58,7 @@ export default function ContactPage() {
           </div>
 
           {/* Detalii contact sub formular */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
             {contactDetails.map(({ icon, label, value, sub, href }) => (
               <div key={label} className="flex gap-3 p-4 bg-slate-50 rounded-xl border border-slate-100">
                 <div className="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center shrink-0">

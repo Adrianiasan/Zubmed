@@ -91,7 +91,7 @@ export default function ContactSection() {
               programare online.
             </p>
             <div className="space-y-4">
-              <div className="grid sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 gap-4">
                 <div>
                   <label className="block text-xs font-medium text-slate-600 mb-1.5">
                     Nume
