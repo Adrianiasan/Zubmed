@@ -110,7 +110,7 @@ export default async function BlogPostPage(props: PageProps<'/blog/[slug]'>) {
             </div>
 
             {post.imageUrl && (
-              <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden mb-10">
+              <div className="relative w-full aspect-square rounded-2xl overflow-hidden mb-10">
                 <Image
                   src={post.imageUrl}
                   alt={post.title}

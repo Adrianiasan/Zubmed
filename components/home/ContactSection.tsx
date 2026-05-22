@@ -41,7 +41,7 @@ export default function ContactSection() {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 content-start">
+          <div className="grid grid-cols-1 gap-4 content-start">
             {contactItems.map(({ icon, label, value }) => (
               <div
                 key={label}
