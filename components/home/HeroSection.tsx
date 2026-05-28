@@ -30,44 +30,41 @@ export default function HeroSection({ slides: allSlides }: Props) {
   useEffect(() => {
     if (slides.length <= 1) return
     const timer = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % slides.length)
+      setCurrent(prev => (prev + 1) % slides.length)
     }, INTERVAL)
     return () => clearInterval(timer)
   }, [slides.length])
 
   return (
-    <section className="relative w-full min-h-screen bg-slate-900 flex items-center justify-center overflow-hidden py-24">
-      {slides.map((slide, i) => (
-        <div
-          key={slide.src + i}
-          className={`absolute inset-0 transition-opacity duration-1000 ${
-            i === current ? 'opacity-100' : 'opacity-0'
-          }`}
-        >
-          <div className="w-full h-full flex items-center justify-center p-6 sm:p-12">
-            <div className="relative w-full max-w-3xl rounded-2xl overflow-hidden shadow-2xl"
-              style={{ aspectRatio: '4/3' }}>
-              <Image
-                src={slide.src}
-                alt={slide.alt}
-                fill
-                className="object-cover"
-                priority={i === 0}
-              />
-            </div>
+    <section className="relative w-full min-h-screen bg-white flex items-center justify-center overflow-hidden py-24">
+      <div className="relative w-full max-w-5xl mx-auto px-4 sm:px-8" style={{ aspectRatio: '4/3' }}>
+        {slides.map((slide, i) => (
+          <div
+            key={slide.src + i}
+            className={`absolute inset-0 rounded-3xl overflow-hidden shadow-xl transition-opacity duration-1000 ${
+              i === current ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            <Image
+              src={slide.src}
+              alt={slide.alt}
+              fill
+              className="object-cover"
+              priority={i === 0}
+            />
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
 
       {slides.length > 1 && (
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-10">
           {slides.map((_, i) => (
             <button
               key={i}
               onClick={() => setCurrent(i)}
               aria-label={`Slide ${i + 1}`}
               className={`h-1.5 rounded-full transition-all duration-300 ${
-                i === current ? 'w-8 bg-white' : 'w-2 bg-white/50'
+                i === current ? 'w-8 bg-blue-600' : 'w-2 bg-slate-300'
               }`}
             />
           ))}
