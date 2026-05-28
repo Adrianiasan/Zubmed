@@ -36,7 +36,7 @@ export default function HeroSection({ slides: allSlides }: Props) {
   }, [slides.length])
 
   return (
-    <section className="relative w-full h-screen overflow-hidden">
+    <section className="relative w-full min-h-screen bg-slate-900 flex items-center justify-center overflow-hidden py-24">
       {slides.map((slide, i) => (
         <div
           key={slide.src + i}
@@ -44,13 +44,18 @@ export default function HeroSection({ slides: allSlides }: Props) {
             i === current ? 'opacity-100' : 'opacity-0'
           }`}
         >
-          <Image
-            src={slide.src}
-            alt={slide.alt}
-            fill
-            className="object-cover"
-            priority={i === 0}
-          />
+          <div className="w-full h-full flex items-center justify-center p-6 sm:p-12">
+            <div className="relative w-full max-w-3xl rounded-2xl overflow-hidden shadow-2xl"
+              style={{ aspectRatio: '4/3' }}>
+              <Image
+                src={slide.src}
+                alt={slide.alt}
+                fill
+                className="object-cover"
+                priority={i === 0}
+              />
+            </div>
+          </div>
         </div>
       ))}
 
