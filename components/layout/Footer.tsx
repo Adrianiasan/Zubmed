@@ -118,8 +118,14 @@ export default function Footer() {
                 {
                   icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z',
                   text: 'Luni–Vineri: 08:30–17:00',
+                  href: undefined,
                 },
-              ].map(({ icon, text }) => (
+                {
+                  icon: 'M16 2H8a6 6 0 00-6 6v8a6 6 0 006 6h8a6 6 0 006-6V8a6 6 0 00-6-6zM12 16a4 4 0 110-8 4 4 0 010 8zm4.5-9a1 1 0 110-2 1 1 0 010 2z',
+                  text: '@zubmed.clinica',
+                  href: 'https://www.instagram.com/zubmed.clinica/',
+                },
+              ].map(({ icon, text, href }) => (
                 <li key={text} className="flex gap-3">
                   <svg
                     viewBox="0 0 24 24"
@@ -130,7 +136,13 @@ export default function Footer() {
                   >
                     <path d={icon} />
                   </svg>
-                  <span className="text-sm text-slate-400">{text}</span>
+                  {href ? (
+                    <a href={href} target="_blank" rel="noopener noreferrer" className="text-sm text-slate-400 hover:text-white transition-colors">
+                      {text}
+                    </a>
+                  ) : (
+                    <span className="text-sm text-slate-400">{text}</span>
+                  )}
                 </li>
               ))}
             </ul>
