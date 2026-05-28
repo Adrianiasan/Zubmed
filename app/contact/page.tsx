@@ -35,6 +35,13 @@ const contactDetails = [
     value: 'Luni–Vineri: 08:30–17:00',
     sub: 'Sâmbătă–Duminică: închis',
   },
+  {
+    icon: 'M16 2H8a6 6 0 00-6 6v8a6 6 0 006 6h8a6 6 0 006-6V8a6 6 0 00-6-6zM12 16a4 4 0 110-8 4 4 0 010 8zm4.5-9a1 1 0 110-2 1 1 0 010 2z',
+    label: 'Instagram',
+    value: '@zubmed.clinica',
+    sub: 'Urmărește-ne',
+    href: 'https://www.instagram.com/zubmed.clinica/',
+  },
 ]
 
 export default function ContactPage() {
@@ -58,7 +65,7 @@ export default function ContactPage() {
           </div>
 
           {/* Detalii contact sub formular */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3">
             {contactDetails.map(({ icon, label, value, sub, href }) => (
               <div key={label} className="flex gap-3 p-4 bg-slate-50 rounded-xl border border-slate-100">
                 <div className="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center shrink-0">
