@@ -40,13 +40,6 @@ function isMongoAvailable() {
 }
 
 export async function getHeroConfigAsync(): Promise<HeroSlide[]> {
-  if (isMongoAvailable()) {
-    try {
-      const { prisma } = await import('./prisma')
-      const setting = await prisma.setting.findUnique({ where: { key: 'hero-config' } })
-      if (setting) return JSON.parse(setting.value)
-    } catch {}
-  }
   return readFromFile()
 }
 
