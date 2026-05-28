@@ -143,13 +143,13 @@ export default function Footer() {
           </p>
           <div className="flex gap-6">
             <Link
-              href="#"
+              href="/politica-de-confidentialitate"
               className="text-sm text-slate-500 hover:text-white transition-colors"
             >
               Politica de confidențialitate
             </Link>
             <Link
-              href="#"
+              href="/termeni-si-conditii"
               className="text-sm text-slate-500 hover:text-white transition-colors"
             >
               Termeni și condiții
