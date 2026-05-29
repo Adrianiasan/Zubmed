@@ -4,6 +4,18 @@ import { buildKeyboard, telegramFetch, STATUS_LABELS, TERMINAL_STATUSES } from '
 
 const VALID_STATUSES = ['contactat', 'programat', 'finalizat', 'nu_s_a_prezentat', 'anulat']
 
+// message.text from Telegram is plain text (no HTML tags) — re-add bold formatting
+function rebuildAsHtml(plainText: string, newStatus: string): string {
+  return plainText
+    .replace('📩 Mesaj nou – Zubmed', '📩 <b>Mesaj nou – Zubmed</b>')
+    .replace('👤 Nume:', '👤 <b>Nume:</b>')
+    .replace('📧 Email:', '📧 <b>Email:</b>')
+    .replace('📞 Telefon:', '📞 <b>Telefon:</b>')
+    .replace('🦷 Serviciu:', '🦷 <b>Serviciu:</b>')
+    .replace('💬 Mesaj:', '💬 <b>Mesaj:</b>')
+    .replace(/📊 Status:[\s\S]*$/, `📊 <b>Status:</b> ${STATUS_LABELS[newStatus]}`)
+}
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
@@ -15,7 +27,6 @@ export async function POST(req: NextRequest) {
 
     const { id: callbackId, message, data } = cq
 
-    // callback_data format: s:DBID:STATUS
     if (!data?.startsWith('s:')) {
       await telegramFetch(token, 'answerCallbackQuery', { callback_query_id: callbackId })
       return NextResponse.json({ ok: true })
@@ -30,17 +41,9 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ ok: true })
     }
 
-    // Try to update DB if we have a real ID
+    // Update DB if we have a real ID
     if (dbId !== 'none') {
       try {
-        const record = await prisma.contactMessage.findUnique({ where: { id: dbId } })
-        if (record?.status === newStatus) {
-          await telegramFetch(token, 'answerCallbackQuery', {
-            callback_query_id: callbackId,
-            text: `Status deja: ${STATUS_LABELS[newStatus]}`,
-          })
-          return NextResponse.json({ ok: true })
-        }
         await prisma.contactMessage.update({
           where: { id: dbId },
           data: { status: newStatus },
@@ -50,23 +53,21 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Edit the Telegram message visually
-    const currentText: string = message.text ?? ''
-    const newText = currentText.replace(
-      /📊 Status:[\s\S]*$/,
-      `📊 <b>Status:</b> ${STATUS_LABELS[newStatus]}`,
-    )
-
+    const chatId = message.chat.id
     const isTerminal = TERMINAL_STATUSES.includes(newStatus)
+    const newHtml = rebuildAsHtml(message.text ?? '', newStatus)
 
-    await telegramFetch(token, 'editMessageText', {
-      chat_id: message.chat.id,
+    // Delete the original message then re-send with updated status
+    await telegramFetch(token, 'deleteMessage', {
+      chat_id: chatId,
       message_id: message.message_id,
-      text: newText,
+    })
+
+    await telegramFetch(token, 'sendMessage', {
+      chat_id: chatId,
+      text: newHtml,
       parse_mode: 'HTML',
-      reply_markup: isTerminal
-        ? { inline_keyboard: [] }
-        : buildKeyboard(dbId, newStatus),
+      ...(isTerminal ? {} : { reply_markup: buildKeyboard(dbId, newStatus) }),
     })
 
     await telegramFetch(token, 'answerCallbackQuery', {
