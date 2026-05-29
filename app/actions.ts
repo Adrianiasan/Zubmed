@@ -18,6 +18,44 @@ export type ContactFormState = {
   fieldErrors?: Partial<Record<string, string[]>>
 }
 
+async function sendTelegramNotification(data: {
+  name: string
+  email: string
+  phone?: string
+  subject?: string
+  message: string
+}) {
+  const token = process.env.TELEGRAM_BOT_TOKEN
+  const chatId = process.env.TELEGRAM_CHAT_ID
+  if (!token || !chatId) return
+
+  const lines = [
+    `📩 *Mesaj nou – Zubmed*`,
+    ``,
+    `👤 *Nume:* ${data.name}`,
+    `📧 *Email:* ${data.email}`,
+    data.phone ? `📞 *Telefon:* ${data.phone}` : null,
+    data.subject ? `🦷 *Serviciu:* ${data.subject}` : null,
+    ``,
+    `💬 *Mesaj:*`,
+    data.message,
+  ].filter(l => l !== null).join('\n')
+
+  try {
+    await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text: lines,
+        parse_mode: 'Markdown',
+      }),
+    })
+  } catch {
+    // Telegram notification failure should not block form submission
+  }
+}
+
 export async function submitContact(
   _prev: ContactFormState | null,
   formData: FormData,
@@ -47,6 +85,8 @@ export async function submitContact(
     if (!isPlaceholder) {
       await prisma.contactMessage.create({ data: result.data })
     }
+
+    await sendTelegramNotification(result.data)
 
     revalidatePath('/contact')
     return { success: true }
