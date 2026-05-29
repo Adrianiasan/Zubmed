@@ -3,6 +3,7 @@
 import { z } from 'zod'
 import { prisma } from '@/lib/prisma'
 import { revalidatePath } from 'next/cache'
+import { buildTelegramMessage, buildKeyboard, telegramFetch } from '@/lib/telegram'
 
 const contactSchema = z.object({
   name: z.string().min(2, 'Numele trebuie să aibă cel puțin 2 caractere'),
@@ -18,41 +19,26 @@ export type ContactFormState = {
   fieldErrors?: Partial<Record<string, string[]>>
 }
 
-async function sendTelegramNotification(data: {
-  name: string
-  email?: string
-  phone: string
-  subject?: string
-  message: string
-}) {
+async function sendTelegramNotification(
+  data: { name: string; email?: string; phone: string; subject?: string; message: string },
+  dbId?: string | null,
+) {
   const token = process.env.TELEGRAM_BOT_TOKEN
   const chatId = process.env.TELEGRAM_CHAT_ID
   if (!token || !chatId) return
 
-  const lines = [
-    `📩 *Mesaj nou – Zubmed*`,
-    ``,
-    `👤 *Nume:* ${data.name}`,
-    `📧 *Email:* ${data.email}`,
-    data.phone ? `📞 *Telefon:* ${data.phone}` : null,
-    data.subject ? `🦷 *Serviciu:* ${data.subject}` : null,
-    ``,
-    `💬 *Mesaj:*`,
-    data.message,
-  ].filter(l => l !== null).join('\n')
+  const text = buildTelegramMessage({ ...data, status: 'in_asteptare' })
+  const replyMarkup = dbId ? buildKeyboard(dbId, 'in_asteptare') : undefined
 
   try {
-    await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        chat_id: chatId,
-        text: lines,
-        parse_mode: 'Markdown',
-      }),
+    await telegramFetch(token, 'sendMessage', {
+      chat_id: chatId,
+      text,
+      parse_mode: 'HTML',
+      ...(replyMarkup ? { reply_markup: replyMarkup } : {}),
     })
-  } catch {
-    // Telegram notification failure should not block form submission
+  } catch (err) {
+    console.error('[Telegram] send error:', err)
   }
 }
 
@@ -78,27 +64,31 @@ export async function submitContact(
   }
 
   try {
+    let dbId: string | null = null
+
     const isPlaceholder =
       !process.env.DATABASE_URL ||
       process.env.DATABASE_URL.includes('username:password')
 
     if (!isPlaceholder) {
       try {
-        await prisma.contactMessage.create({
+        const record = await prisma.contactMessage.create({
           data: {
             name: result.data.name,
             email: result.data.email ?? '',
             phone: result.data.phone,
             subject: result.data.subject,
             message: result.data.message,
+            status: 'in_asteptare',
           },
         })
+        dbId = record.id
       } catch (dbErr) {
         console.error('[Contact] Prisma error:', dbErr)
       }
     }
 
-    await sendTelegramNotification(result.data)
+    await sendTelegramNotification(result.data, dbId)
 
     revalidatePath('/contact')
     return { success: true }
