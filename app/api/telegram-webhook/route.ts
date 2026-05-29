@@ -53,7 +53,7 @@ export async function POST(req: NextRequest) {
     // Edit the Telegram message visually
     const currentText: string = message.text ?? ''
     const newText = currentText.replace(
-      /📊 Status:.*$/s,
+      /📊 Status:[\s\S]*$/,
       `📊 <b>Status:</b> ${STATUS_LABELS[newStatus]}`,
     )
     const newKeyboard = buildKeyboard(dbId, newStatus)
