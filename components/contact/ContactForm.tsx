@@ -4,6 +4,7 @@ import { useActionState } from 'react'
 import { submitContact, type ContactFormState } from '@/app/actions'
 
 const services = [
+  'Consultație',
   'Stomatologie Generală',
   'Implant Dentar',
   'Ortodonție',
@@ -73,13 +74,12 @@ export default function ContactForm() {
 
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-1.5">
-            Email <span className="text-red-500">*</span>
+            Email
           </label>
           <input
             id="email"
             name="email"
             type="email"
-            required
             placeholder="exemplu@email.com"
             className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent transition-all"
           />
@@ -110,9 +110,9 @@ export default function ContactForm() {
           <select
             id="subject"
             name="subject"
+            defaultValue="Consultație"
             className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent transition-all bg-white"
           >
-            <option value="">Selectează un serviciu</option>
             {services.map((s) => (
               <option key={s} value={s}>
                 {s}
