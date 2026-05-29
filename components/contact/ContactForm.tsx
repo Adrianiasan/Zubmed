@@ -92,15 +92,19 @@ export default function ContactForm() {
       <div className="grid sm:grid-cols-2 gap-5">
         <div>
           <label htmlFor="phone" className="block text-sm font-medium text-slate-700 mb-1.5">
-            Telefon
+            Telefon <span className="text-red-500">*</span>
           </label>
           <input
             id="phone"
             name="phone"
             type="tel"
+            required
             placeholder="+373 xx xxx xxx"
             className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent transition-all"
           />
+          {state?.fieldErrors?.phone && (
+            <p className="text-red-500 text-xs mt-1">{state.fieldErrors.phone[0]}</p>
+          )}
         </div>
 
         <div>

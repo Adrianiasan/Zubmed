@@ -7,7 +7,7 @@ import { revalidatePath } from 'next/cache'
 const contactSchema = z.object({
   name: z.string().min(2, 'Numele trebuie să aibă cel puțin 2 caractere'),
   email: z.string().email('Adresa de email nu este validă').optional().or(z.literal('')),
-  phone: z.string().optional(),
+  phone: z.string().min(6, 'Numărul de telefon este obligatoriu'),
   subject: z.string().optional(),
   message: z.string().min(10, 'Mesajul trebuie să aibă cel puțin 10 caractere'),
 })
@@ -21,7 +21,7 @@ export type ContactFormState = {
 async function sendTelegramNotification(data: {
   name: string
   email?: string
-  phone?: string
+  phone: string
   subject?: string
   message: string
 }) {
@@ -63,7 +63,7 @@ export async function submitContact(
   const raw = {
     name: formData.get('name') as string,
     email: (formData.get('email') as string) || undefined,
-    phone: (formData.get('phone') as string) || undefined,
+    phone: formData.get('phone') as string,
     subject: (formData.get('subject') as string) || undefined,
     message: formData.get('message') as string,
   }
