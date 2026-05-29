@@ -30,31 +30,32 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ ok: true })
     }
 
-    // Fetch record and update status
-    const record = await prisma.contactMessage.findUnique({ where: { id: dbId } })
-    if (!record) {
-      await telegramFetch(token, 'answerCallbackQuery', {
-        callback_query_id: callbackId,
-        text: 'Mesajul nu a fost găsit.',
-      })
-      return NextResponse.json({ ok: true })
+    // Try to update DB if we have a real ID
+    if (dbId !== 'none') {
+      try {
+        const record = await prisma.contactMessage.findUnique({ where: { id: dbId } })
+        if (record?.status === newStatus) {
+          await telegramFetch(token, 'answerCallbackQuery', {
+            callback_query_id: callbackId,
+            text: `Status deja: ${STATUS_LABELS[newStatus]}`,
+          })
+          return NextResponse.json({ ok: true })
+        }
+        await prisma.contactMessage.update({
+          where: { id: dbId },
+          data: { status: newStatus },
+        })
+      } catch (err) {
+        console.error('[Webhook] DB update error:', err)
+      }
     }
 
-    if (record.status === newStatus) {
-      await telegramFetch(token, 'answerCallbackQuery', {
-        callback_query_id: callbackId,
-        text: `Status deja: ${STATUS_LABELS[newStatus]}`,
-      })
-      return NextResponse.json({ ok: true })
-    }
-
-    await prisma.contactMessage.update({
-      where: { id: dbId },
-      data: { status: newStatus },
-    })
-
-    // Rebuild and edit the Telegram message
-    const newText = buildTelegramMessage({ ...record, status: newStatus })
+    // Edit the Telegram message visually
+    const currentText: string = message.text ?? ''
+    const newText = currentText.replace(
+      /📊 Status:.*$/s,
+      `📊 <b>Status:</b> ${STATUS_LABELS[newStatus]}`,
+    )
     const newKeyboard = buildKeyboard(dbId, newStatus)
 
     await telegramFetch(token, 'editMessageText', {

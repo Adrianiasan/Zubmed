@@ -28,14 +28,14 @@ async function sendTelegramNotification(
   if (!token || !chatId) return
 
   const text = buildTelegramMessage({ ...data, status: 'in_asteptare' })
-  const replyMarkup = dbId ? buildKeyboard(dbId, 'in_asteptare') : undefined
+  const replyMarkup = buildKeyboard(dbId ?? 'none', 'in_asteptare')
 
   try {
     await telegramFetch(token, 'sendMessage', {
       chat_id: chatId,
       text,
       parse_mode: 'HTML',
-      ...(replyMarkup ? { reply_markup: replyMarkup } : {}),
+      reply_markup: replyMarkup,
     })
   } catch (err) {
     console.error('[Telegram] send error:', err)
