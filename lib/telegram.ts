@@ -1,8 +1,13 @@
 export const STATUS_LABELS: Record<string, string> = {
-  in_asteptare: '🟡 În așteptare',
+  in_asteptare: '🕐 În așteptare',
+  contactat: '📞 Contactat',
+  programat: '📅 Programat',
   finalizat: '✅ Finalizat',
-  rejectat: '❌ Rejectat',
+  nu_s_a_prezentat: '🚫 Nu s-a prezentat',
+  anulat: '❌ Anulat',
 }
+
+export const TERMINAL_STATUSES = ['finalizat', 'anulat']
 
 function esc(text: string) {
   return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
@@ -33,21 +38,17 @@ export function buildTelegramMessage(data: {
 }
 
 export function buildKeyboard(dbId: string, currentStatus: string) {
+  const btn = (status: string) => ({
+    text: currentStatus === status
+      ? STATUS_LABELS[status] + ' ✓'
+      : STATUS_LABELS[status],
+    callback_data: `s:${dbId}:${status}`,
+  })
   return {
-    inline_keyboard: [[
-      {
-        text: currentStatus === 'in_asteptare' ? '🟡 În așteptare ✓' : '🟡 În așteptare',
-        callback_data: `s:${dbId}:in_asteptare`,
-      },
-      {
-        text: currentStatus === 'finalizat' ? '✅ Finalizat ✓' : '✅ Finalizat',
-        callback_data: `s:${dbId}:finalizat`,
-      },
-      {
-        text: currentStatus === 'rejectat' ? '❌ Rejectat ✓' : '❌ Rejectat',
-        callback_data: `s:${dbId}:rejectat`,
-      },
-    ]],
+    inline_keyboard: [
+      [btn('contactat'), btn('programat'), btn('nu_s_a_prezentat')],
+      [btn('finalizat'), btn('anulat')],
+    ],
   }
 }
 

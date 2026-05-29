@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
-import { buildTelegramMessage, buildKeyboard, telegramFetch, STATUS_LABELS } from '@/lib/telegram'
+import { buildKeyboard, telegramFetch, STATUS_LABELS, TERMINAL_STATUSES } from '@/lib/telegram'
 
-const VALID_STATUSES = ['in_asteptare', 'finalizat', 'rejectat']
+const VALID_STATUSES = ['contactat', 'programat', 'finalizat', 'nu_s_a_prezentat', 'anulat']
 
 export async function POST(req: NextRequest) {
   try {
@@ -56,14 +56,17 @@ export async function POST(req: NextRequest) {
       /📊 Status:[\s\S]*$/,
       `📊 <b>Status:</b> ${STATUS_LABELS[newStatus]}`,
     )
-    const newKeyboard = buildKeyboard(dbId, newStatus)
+
+    const isTerminal = TERMINAL_STATUSES.includes(newStatus)
 
     await telegramFetch(token, 'editMessageText', {
       chat_id: message.chat.id,
       message_id: message.message_id,
       text: newText,
       parse_mode: 'HTML',
-      reply_markup: newKeyboard,
+      reply_markup: isTerminal
+        ? { inline_keyboard: [] }
+        : buildKeyboard(dbId, newStatus),
     })
 
     await telegramFetch(token, 'answerCallbackQuery', {
