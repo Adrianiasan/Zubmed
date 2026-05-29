@@ -83,19 +83,27 @@ export async function submitContact(
       process.env.DATABASE_URL.includes('username:password')
 
     if (!isPlaceholder) {
-      await prisma.contactMessage.create({
-        data: {
-          ...result.data,
-          email: result.data.email ?? '',
-        },
-      })
+      try {
+        await prisma.contactMessage.create({
+          data: {
+            name: result.data.name,
+            email: result.data.email ?? '',
+            phone: result.data.phone,
+            subject: result.data.subject,
+            message: result.data.message,
+          },
+        })
+      } catch (dbErr) {
+        console.error('[Contact] Prisma error:', dbErr)
+      }
     }
 
     await sendTelegramNotification(result.data)
 
     revalidatePath('/contact')
     return { success: true }
-  } catch {
+  } catch (err) {
+    console.error('[Contact] Unexpected error:', err)
     return {
       error: 'A apărut o eroare. Vă rugăm să încercați din nou.',
     }
