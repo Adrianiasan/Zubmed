@@ -20,7 +20,7 @@ export type ContactFormState = {
 
 async function sendTelegramNotification(data: {
   name: string
-  email: string
+  email?: string
   phone?: string
   subject?: string
   message: string
