@@ -83,7 +83,12 @@ export async function submitContact(
       process.env.DATABASE_URL.includes('username:password')
 
     if (!isPlaceholder) {
-      await prisma.contactMessage.create({ data: result.data })
+      await prisma.contactMessage.create({
+        data: {
+          ...result.data,
+          email: result.data.email ?? '',
+        },
+      })
     }
 
     await sendTelegramNotification(result.data)
